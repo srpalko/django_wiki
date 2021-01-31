@@ -1,0 +1,29 @@
+{% extends 'encyclopedia/layout.html' %}
+
+{% block title %}
+    New Wiki
+{% endblock %}
+
+{% block body %}
+
+    <h1>Create a new wiki article</h1>
+    <h3> {{ error_message }} </h3>
+    <p>Enter your text in markdown. Press the save button when finished.</p>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="/create/" method="post">
+        {% csrf_token %}
+        <label for="title">Wiki Title</label>
+        <input type="text" id="title" name="title">
+        <input type="submit" value="Save Wiki">
+        <textarea name="wiki-text">
+        {{text}}
+        </textarea>
+    </form>
+
+{% endblock %}
